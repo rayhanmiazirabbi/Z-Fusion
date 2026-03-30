@@ -689,8 +689,8 @@ class ModelComponents:
     open_te_btn: gr.Button
     open_vae_btn: gr.Button
     
-    # Hidden states
-    clip_type_state: gr.State
+    # Hidden values
+    clip_type_state: gr.Textbox
     presets_state: gr.State  # Stores list of UserPreset dicts
     
     # Configuration flags
@@ -738,7 +738,7 @@ def create_quick_preset_selector(
     label: str = "Model Preset",
     edit_only: bool = False,
     default_to_manual: bool = False,
-) -> tuple[gr.Dropdown, gr.State, gr.State]:
+) -> tuple[gr.Dropdown, gr.Textbox, gr.State]:
     """
     Create a quick preset selector dropdown for the main UI.
     
@@ -778,7 +778,11 @@ def create_quick_preset_selector(
         scale=1,
     )
     
-    clip_type_state = gr.State(value=active_preset.clip_type if active_preset else default_clip_type)
+    clip_type_state = gr.Textbox(
+        value=active_preset.clip_type if active_preset else default_clip_type,
+        label="Clip Type",
+        visible=False,
+    )
     presets_state = gr.State(value=[p.to_dict() for p in presets])
     
     return quick_preset, clip_type_state, presets_state
@@ -794,7 +798,7 @@ def create_model_ui(
     accordion_open: bool = False,
     settings_manager=None,
     quick_preset_dropdown: gr.Dropdown = None,
-    clip_type_state: gr.State = None,
+    clip_type_state: gr.Textbox = None,
     presets_state: gr.State = None,
     edit_only: bool = False,
 ) -> ModelComponents:
@@ -807,7 +811,7 @@ def create_model_ui(
         accordion_open: Whether accordion starts open
         settings_manager: Settings manager for loading/saving presets
         quick_preset_dropdown: External quick preset dropdown to sync with
-        clip_type_state: External clip_type state to sync with
+        clip_type_state: External hidden clip_type component to sync with
         presets_state: External presets state to sync with
         edit_only: If True, only show base types that support edit workflows
         
@@ -993,9 +997,13 @@ def create_model_ui(
                 open_te_btn = gr.Button("📂 text_encoders", size="sm")
                 open_vae_btn = gr.Button("📂 vae", size="sm")
         
-        # Hidden states (use external if provided)
+        # Hidden values (use external if provided, otherwise default to lumina2)
         if clip_type_state is None:
-            clip_type_state = gr.State(value=active_preset.clip_type if active_preset else "lumina2")
+            clip_type_state = gr.Textbox(
+                value=active_preset.clip_type if active_preset else default_clip_type,
+                label="Clip Type",
+                visible=False,
+            )
         if presets_state is None:
             presets_state = gr.State(value=[p.to_dict() for p in presets])
     
