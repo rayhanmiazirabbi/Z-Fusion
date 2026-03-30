@@ -1249,6 +1249,11 @@ def _setup_event_handlers(
     # Wrapper functions for async generate (async generators)
     # Returns (gallery, status, seed, selected_image) - selected_image is always None to clear stale selection
     async def generate_t2i(p, w, h, neg, clip_type, gguf, *args):
+        # DEBUG: Log the actual received values
+        print(f"DEBUG generate_t2i: clip_type='{clip_type}' (type: {type(clip_type).__name__})")
+        print(f"DEBUG generate_t2i: gguf={gguf} (type: {type(gguf).__name__})")
+        print(f"DEBUG generate_t2i: p='{p}', w={w}, h={h}")
+
         async for gallery, status, seed_val in generate_image(services, p, neg, "t2i", clip_type, gguf, w, h, None, 2.0, 0.67, *args):
             yield gallery, status, seed_val, None  # Clear selected_gallery_image on each yield
     

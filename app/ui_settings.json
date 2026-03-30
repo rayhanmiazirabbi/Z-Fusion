@@ -1,0 +1,34 @@
+{
+  "model_presets_v2": {
+    "presets": [
+      {
+        "id": "default_zimage",
+        "name": "\u26a1 Z-Image",
+        "base_type": "zimage",
+        "use_gguf": false,
+        "diffusion": "z_image_turbo_bf16.safetensors",
+        "text_encoder": "qwen_3_4b.safetensors",
+        "vae": "ae.safetensors"
+      },
+      {
+        "id": "default_flux2_klein_4b",
+        "name": "\ud83c\udf0a Flux2 Klein 4B",
+        "base_type": "flux2_klein_4b",
+        "use_gguf": false,
+        "diffusion": "flux-2-klein-4b-fp8.safetensors",
+        "text_encoder": "qwen_3_4b.safetensors",
+        "vae": "flux2-vae.safetensors"
+      },
+      {
+        "id": "default_flux2_klein_9b",
+        "name": "\ud83c\udf0a Flux2 Klein 9B",
+        "base_type": "flux2_klein_9b",
+        "use_gguf": false,
+        "diffusion": "flux-2-klein-9b.safetensors",
+        "text_encoder": "qwen_3_8b_fp8mixed.safetensors",
+        "vae": "flux2-vae.safetensors"
+      }
+    ],
+    "active_preset": "default_flux2_klein_4b"
+  }
+}
