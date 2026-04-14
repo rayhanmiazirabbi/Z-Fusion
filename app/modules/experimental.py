@@ -1041,8 +1041,8 @@ def create_tab(services: "SharedServices") -> gr.TabItem:
             if workflow == "Klein-Tiled-SeedVR2":
                 async for result in run_klein_seedvr2(
                     services, img, prompt_text, klein_seed_val, klein_randomize,
-                    k_mp, k_steps, k_denoise, k_scheduler, k_s_noise, False,
-                    k_unet, k_clip, k_vae, k_dit, k_blocks, k_attn, k_color,
+                    k_mp, k_steps, k_denoise, k_scheduler, k_s_noise, is_gguf,
+                    k_unet, k_clip, k_vae, k_dit, k_blocks, k_attn, k_color, auto, 
                     *lora_args
                 ):
                     slider_tuple, status_msg, actual_seed, res_path = result
@@ -1073,8 +1073,8 @@ def create_tab(services: "SharedServices") -> gr.TabItem:
             if workflow == "Klein-Tiled-SeedVR2":
                 async for result in run_klein_seedvr2_batch(
                     services, files, folder, prompt_text, klein_seed_val, klein_randomize,
-                    k_mp, k_steps, k_denoise, k_scheduler, k_s_noise, False,
-                    k_unet, k_clip, k_vae, k_dit, k_blocks, k_attn, k_color,
+                    k_mp, k_steps, k_denoise, k_scheduler, k_s_noise, is_gguf,
+                    k_unet, k_clip, k_vae, k_dit, k_blocks, k_attn, k_color, auto, 
                     *lora_args
                 ):
                     gallery, status_msg, actual_seed = result
@@ -1100,7 +1100,6 @@ def create_tab(services: "SharedServices") -> gr.TabItem:
             klein_megapixels, klein_steps, klein_denoise, klein_scheduler, klein_s_noise,
             klein_unet_name, klein_clip_name, klein_vae_name,
             klein_dit_model, klein_blocks_to_swap, klein_attention_mode, klein_color_correction,
-            autosave,
         ]
         shared_seed_inputs = [seed, randomize_seed, klein_seed, klein_randomize_seed]
 
