@@ -30,7 +30,7 @@ module.exports = {
         },
         path: "app",
         message: [
-          "python comfyui/main.py {{platform === 'win32' && gpu === 'amd' ? '--directml' : args.sage ? '--use-sage-attention' : args.flash ? '--use-flash-attention' : ''}}"          
+          "python comfyui/main.py {{platform === 'win32' && gpu === 'amd' ? '--directml' : args.sage ? '--use-sage-attention' : args.flash ? '--use-flash-attention' : ''}} --gpu-only"
         ],
         on: [{
           // Wait for ComfyUI to be ready
@@ -85,7 +85,7 @@ module.exports = {
         venv: "env",
         path: "app",
         message: [
-          "python app.py"
+          "python app.py --host 0.0.0.0"
         ],
         on: [{
           event: "/Running on local URL:\\s+(http:\\/\\/[0-9.:]+)/",

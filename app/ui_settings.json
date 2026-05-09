@@ -30,5 +30,6 @@
       }
     ],
     "active_preset": "default_flux2_klein_4b"
-  }
+  },
+  "clear_temp_on_start": true
 }
